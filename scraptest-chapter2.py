@@ -1,17 +1,9 @@
-from urllib.request import urlopen
+from urllib.request import urlopen 
 from bs4 import BeautifulSoup
 
-html = urlopen('https://www.pythonscraping.com/pages/warandpeace.html')
-bs = BeautifulSoup(html.read(), 'html.parser')
+html = urlopen('http://www.pythonscraping.com/pages/page3.html')
+bs = BeautifulSoup(html, 'html.parser')
 
-tagName = 'span'
-tagAttribute = {'class':{'green', 'red'}}
-
-nameList = bs.find_all(tagName, tagAttribute, limit=3)
-title = bs.find_all(id='title', class_='text')
-nameList = bs.find_all(string='the prince')
-print(title)
-for name in nameList:
-    print(name.get_text().replace('\n', ' '))
-
-print(len(nameList))
+# for child in bs.find('table',{'id':'giftList'}).children:
+for child in bs.find('table',{'id':'giftList'}).tr.next_siblings: 
+    print(child)
